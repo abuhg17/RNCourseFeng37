@@ -35,7 +35,7 @@ app.post('/LoadData', async (req, res) => {
   }
 
   try {
-    const checkUserSql = 'SELECT * FROM bankdata WHERE "userName" = $1';
+    const checkUserSql = 'SELECT * FROM bankdata WHERE userName = $1';
     const result = await db.query(checkUserSql, [userName]);
 
     if (result.rows.length > 0) {
@@ -74,14 +74,14 @@ app.post('/SaveData', async (req, res) => {
   }
 
   try {
-    const checkUserSql = 'SELECT * FROM bankdata WHERE "userName" = $1';
+    const checkUserSql = 'SELECT * FROM bankdata WHERE userName = $1';
     const result = await db.query(checkUserSql, [userName]);
 
     if (result.rows.length > 0) {
       const updateSql = `UPDATE bankdata SET 
                           bank0 = $1, bank1 = $2, bank2 = $3, bank3 = $4, bank4 = $5, 
                           bank5 = $6, bank6 = $7, bank7 = $8, bank8 = $9, bank9 = $10 
-                          WHERE "userName" = $11`;
+                          WHERE userName = $11`;
 
       await db.query(updateSql, [
         ...bankSavings,
@@ -89,7 +89,7 @@ app.post('/SaveData', async (req, res) => {
       ]);
       return res.json({ success: true, message: 'Data updated successfully' });
     } else {
-      const insertSql = `INSERT INTO bankdata ("userName", bank0, bank1, bank2, bank3, bank4, bank5, bank6, bank7, bank8, bank9) 
+      const insertSql = `INSERT INTO bankdata (userName, bank0, bank1, bank2, bank3, bank4, bank5, bank6, bank7, bank8, bank9) 
                          VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)`;
 
       await db.query(insertSql, [
