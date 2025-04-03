@@ -3,7 +3,7 @@ const { Client } = require('pg'); // Import the pg module
 const cors = require('cors');  // Import CORS package
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3001;
 
 // Enable CORS to allow requests from different origins
 app.use(cors());
