@@ -3,7 +3,7 @@ const { Client } = require('pg'); // Import the pg module
 const cors = require('cors');  // Import CORS package
 
 const app = express();
-const port = process.env.PORT || 3001;
+const port = 3000;
 
 // Enable CORS to allow requests from different origins
 app.use(cors());
@@ -13,20 +13,21 @@ app.use(express.json());
 
 // PostgreSQL database connection configuration
 const db = new Client({
-  host: 'dpg-cvn747bipnbc73d25080-a',   // Hostname from Render
-  port: 5432,                          // Default PostgreSQL port
-  user: 'rncoursefeng37_user',          // Your PostgreSQL username
-  password: '1b8AQoyVtIff8pUGS8by1x1yPV1gxQjT', // Your PostgreSQL password
-  database: 'rncoursefeng37',          // Your PostgreSQL database name
+  host: "dpg-cvn747bipnbc73d25080-a.oregon-postgres.render.com",
+  port: 5432,
+  user: "rncoursefeng37_user",
+  password: "1b8AQoyVtIff8pUGS8by1x1yPV1gxQjT",
+  database: "rncoursefeng37",
+  ssl: { rejectUnauthorized: false }, // Enable SSL
 });
 
 // Connect to PostgreSQL database
 db.connect((err) => {
   if (err) {
-    console.error('Database connection failed:', err);
+    console.error("Database connection failed:", err);
     return;
   }
-  console.log('Connected to PostgreSQL database');
+  console.log("Connected to PostgreSQL database");
 });
 
 // LoadData endpoint
