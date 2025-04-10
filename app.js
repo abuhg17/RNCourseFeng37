@@ -25,6 +25,11 @@ const db = new Client({
 db.connect()
   .then(() => console.log('Connected to PostgreSQL database'))
   .catch((err) => console.error('Database connection failed:', err));
+  
+// 首頁顯示 "RNCourseFeng37"
+app.get('/', (req, res) => {
+  res.send('<h1>RNCourseFeng37</h1>');
+});
 
 // LoadData endpoint
 app.post('/LoadData', async (req, res) => {
